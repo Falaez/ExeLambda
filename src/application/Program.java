@@ -9,7 +9,6 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 
 import entities.Employee;
-import service.EmployeeService;
 
 public class Program {
 
@@ -34,16 +33,11 @@ public class Program {
 			}
 			
 			List<String> mail = list.stream().filter(e -> e.getSalary() > sal).map(e -> e.getEmail()).sorted().collect(Collectors.toList());
-			for (String s : mail ) {
-				System.out.println(s);
-			}
+			System.out.println("Email of people whose salary is more than"+String.format("%.2f", sal));
+			mail.forEach(System.out::println);
 			
-			
-			EmployeeService es = new EmployeeService();
-			
-			double sum = es.filteredSum(list, e -> e.getName().charAt(0)=='M');
-			System.out.println("Sum of salary of people whose name starts with M: "+String.format("%.2f", sum));
-			
+			double sum = list.stream().filter(e -> e.getName().charAt(0) == 'M').map(x-> x.getSalary()).reduce(0.0, (x,y) ->x+y);
+			System.out.println("Sum of salary from people whose name starts with 'M': " + String.format("%.2f", sum));
 		}
 		catch(IOException e) {
 			System.out.print("Error: "+ e.getMessage());
