@@ -34,7 +34,10 @@ public class Program {
 			}
 			
 			List<String> mail = list.stream().filter(e -> e.getSalary() > sal).map(e -> e.getEmail()).sorted().collect(Collectors.toList());
-			System.out.println(mail);
+			for (String s : mail ) {
+				System.out.println(s);
+			}
+			
 			
 			EmployeeService es = new EmployeeService();
 			
