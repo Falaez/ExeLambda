@@ -4,12 +4,12 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
 import entities.Employee;
+import service.EmployeeService;
 
 public class Program {
 
@@ -34,10 +34,12 @@ public class Program {
 			}
 			
 			List<String> mail = list.stream().filter(e -> e.getSalary() > sal).map(e -> e.getEmail()).sorted().collect(Collectors.toList());
-			String[] mails = line.split(",");
-			for (int i = 0;  i< mails.length ; i++) {
-				System.out.println(mails[i]);
-			}
+			System.out.println(mail);
+			
+			EmployeeService es = new EmployeeService();
+			
+			double sum = es.filteredSum(list, e -> e.getName().charAt(0)=='M');
+			System.out.println("Sum of salary of people whose name starts with M: "+String.format("%.2f", sum));
 			
 		}
 		catch(IOException e) {
